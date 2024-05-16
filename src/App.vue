@@ -1,13 +1,14 @@
 <template>
   <div style="position: relative;">
-    <CssBg />
+    <Page2 />
+    <!-- <CssBg />
     <Start v-if="!started" v-model="allowMusice" @start="started = true" />
     <div v-else>
       <audio v-if="allowMusice" id="bgMusic" autoplay loop>
         <source src="./assets/emola.ogg" type="audio/mp3" />
       </audio>
       <Page1 />
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup lang="ts">
@@ -15,6 +16,7 @@ import { ref } from "vue";
 import CssBg from "./components/css-bg.vue";
 import Start from "./components/start.vue";
 import Page1 from "./components/page1.vue";
+import Page2 from "./components/page2.vue";
 const started = ref(false);
 const allowMusice = ref(true);
 </script>

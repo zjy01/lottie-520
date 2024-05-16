@@ -14,7 +14,11 @@
 }
 @font-face {
   font-family: 'youxi';
-  src: url('./assets/hanyiyongzixiaolabajianti.ttf');
+  src: url('./assets/yx.ttf');
+}
+@font-face {
+  font-family: 'dl';
+  src: url('./assets/dl.ttf');
 }
 * {
   box-sizing: border-box;
