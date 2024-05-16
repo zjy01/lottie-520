@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
-const dlDuration = 5000;
+const dlDuration = 3000;
 const rightAnimation = ref(false);
 const leftAnimation = ref(false);
 const topAnimation = ref(false);
@@ -60,7 +60,7 @@ onMounted(() => {
   // 横幅加载
   setTimeout(() => {
     topAnimation.value = true;
-  }, 0);
+  }, dlDuration * 2);
 })
 </script>
 
@@ -99,22 +99,22 @@ onMounted(() => {
 }
 .load {
   img {
-    animation: fadeInRight 1s;
+    animation: fadeInRight .8s;
   }
   .dl {
-    @t: 5s;
+    @t: 3s;
     height: 0vw;
-    animation: dl-v-animation @t linear 1s forwards;
+    animation: dl-v-animation @t linear .7s forwards;
     span {
       each(range(7), {
         &:nth-child(@{value}) {
-          animation: jackInTheBox 1s ease-in-out (@t / 9 * (@value + 1) + 0.5s) forwards;
+          animation: jackInTheBox 1s ease-in-out (@t / 9 * (@value + 1) + 0.3s) forwards;
         }
       });
     }
   }
   .dl-t {
-    @t: 2s;
+    @t: 1.2s;
     width: 0vw;
     animation: dl-h-animation @t linear;
     span {
