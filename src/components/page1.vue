@@ -1,5 +1,5 @@
 <template>
-  <div class="page1">
+  <div class="page">
     <div>
       <!-- 留空 -->
     </div>
@@ -41,7 +41,7 @@
           <img src="../assets/zjh-bg.png" style="height: 70%" />
         </div>
         <div class="msg">
-          <div class="name">好二娃: 张茄灰</div>
+          <div class="name">大犟种: 张茄灰</div>
           <div class="text">养猫圣手</div>
         </div>
       </div>
@@ -79,7 +79,7 @@ import heart from "../assets/heart.lottie";
 </script>
 
 <style scoped lang="less">
-.page1 {
+.page {
   height: 100vh;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative; overflow: hidden;">
-    <Page2 />
+    <Page3 />
     <!-- <CssBg />
     <Start v-if="!started" v-model="allowMusice" @start="started = true" />
     <div v-else>
@@ -8,6 +8,7 @@
         <source src="./assets/emola.ogg" type="audio/mp3" />
       </audio>
       <Page1 />
+      <Page2 />
     </div> -->
   </div>
 </template>
@@ -17,6 +18,7 @@ import CssBg from "./components/css-bg.vue";
 import Start from "./components/start.vue";
 import Page1 from "./components/page1.vue";
 import Page2 from "./components/page2.vue";
+import Page3 from "./components/page3.vue";
 const started = ref(false);
 const allowMusice = ref(true);
 </script>
