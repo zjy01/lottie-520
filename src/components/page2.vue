@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="left load" v-if="leftAnimation">
+    <div class="left load" v-if="leftShow">
       <img src="../assets/zjh-flash.png" />
       <div class="dl">
         <div class="text">
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="right load" v-if="rightAnimation">
+    <div class="right load" v-if="rightShow">
       <img src="../assets/zzb-flash.png" />
       <div class="dl">
         <div class="text">
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="top load" v-if="topAnimation">
+    <div class="top load" v-if="topShow">
       <div class="dl dl-t">
         <div class="text">
           <span>善</span>
@@ -38,35 +38,70 @@
         </div>
       </div>
     </div>
+    <div class="opt animate__animated animate__zoomInDown" v-if="optShow">
+      <div class="cat">
+        <img src="../assets/zzb-good.png"/>
+      </div>
+      <p>请直视可爱之神<br />许下你的愿望</p>
+      <div class="options">
+        <div class="option-item">
+          <dotlottie-player class="lottie" :src="box" :autoplay.attr="true" :loop.attr="true" />
+          <span @click="showGiftDialog = true">选择一份礼品</span>
+        </div>
+        <div class="option-item">
+          <dotlottie-player class="lottie2" :src="agreement" :autoplay.attr="true" :loop.attr="true" />
+          <span>定下一份契约</span>
+        </div>
+      </div>
+    </div>
+    <div v-if="showGiftDialog" class="gift-dialog-mask" @click="showGiftDialog = false">
+      <div class="gift-dialog animate__animated animate__zoomInDown">
+        <p>请使用手机，自行选择以下任一款APP选择商品并下单，提供订单号进行报销。</p>
+        <div class="icon-app">
+          <img src="../assets/jd.png" />
+          <img src="../assets/tb.png" />
+          <img src="../assets/pdd.png" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import box from '../assets/box.lottie';
+import agreement from '../assets/agreement.lottie';
 
-const dlDuration = 3000;
-const rightAnimation = ref(false);
-const leftAnimation = ref(false);
-const topAnimation = ref(false);
+const dlDuration = 3000 + 800;
+const rightShow = ref(false);
+const leftShow = ref(false);
+const topShow = ref(false);
+const optShow = ref(false); 
+const showGiftDialog = ref(false); 
 onMounted(() => {
   // 上联加载
   setTimeout(() => {
-    rightAnimation.value = true;
+    rightShow.value = true;
   });
   // 下联加载
   setTimeout(() => {
-    leftAnimation.value = true;
+    leftShow.value = true;
   }, dlDuration);
   // 横幅加载
   setTimeout(() => {
-    topAnimation.value = true;
+    topShow.value = true;
   }, dlDuration * 2);
+  // 选项加载
+  setTimeout(() => {
+    optShow.value = true;
+  }, dlDuration * 2 + 1500);
 })
 </script>
 
 <style scoped lang="less">
 .page {
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
   font-family: 'dl';
 }
@@ -123,18 +158,6 @@ onMounted(() => {
           animation: jackInTheBox 1s ease-in-out (@t / 5 * (4 - @value + 1)) forwards;
         }
       });
-      // &:nth-child(4) {
-      //   animation: pulse 1s ease-in-out forwards;
-      // }
-      // &:nth-child(3) {
-      //   animation: pulse 1s ease-in-out 1+.8s forwards;
-      // }
-      // &:nth-child(2) {
-      //   animation: pulse 1s ease-in-out 1+.8s * 2 forwards;
-      // }
-      // &:nth-child(1) {
-      //   animation: pulse 1s ease-in-out 1+.8s * 3 forwards;
-      // }
     }
   }
 }
@@ -207,6 +230,80 @@ onMounted(() => {
   }
   to {
     width: 50vw;
+  }
+}
+
+.opt {
+  font-family: 'youxi';
+  width: 50vw;
+  position: absolute;
+  top: 30vh;
+  left: 25vw;
+  text-align: center;
+  font-size: 6vw;
+  text-shadow: #027d67 0.05em 0.05em;
+  .cat {
+    margin-left: 5vw;
+    width: 40vw;
+    height: 40vw;
+    border-radius: 20%;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+  .options {
+    font-size: 4vw;
+    .option-item {
+      margin-left: -4vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .lottie {
+        width: 15vw;
+      }
+      .lottie2 {
+        width: 10vw;
+        margin: 2.5vw;
+      }
+      & > span {
+        margin-left: -1vw;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.gift-dialog-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.gift-dialog {
+  font-family: 'youxi';
+  padding: 8vw;
+  position: absolute;
+  font-size: 4vw;
+  left: 10vw;
+  background-color: #fff;
+  border-radius: 4vw;
+  top: 20vh;
+  width: 80vw;
+  border: #00d9b1 1vw solid;
+  color: #027d67;
+
+  .icon-app {
+    text-align: center;
+    img {
+      margin: 0 1vw;
+      width: 10vw;
+      height: 10vw;
+    }
   }
 }
 

@@ -97,13 +97,13 @@ input[type="checkbox"] {
     0% {
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
-        text-shadow: #027d67 -0.02em -0.02em ;
+        text-shadow: #027d67 -0.02em -0.02em;
     }
 
     50% {
         -webkit-transform: scale3d(1.05,1.05,1.05);
         transform: scale3d(1.05,1.05,1.05);
-        text-shadow: #027d67 -0.03em -0.03em ;
+        text-shadow: #027d67 -0.03em -0.03em;
     }
 
     to {

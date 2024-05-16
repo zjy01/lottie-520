@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative;">
+  <div style="position: relative; overflow: hidden;">
     <Page2 />
     <!-- <CssBg />
     <Start v-if="!started" v-model="allowMusice" @start="started = true" />
