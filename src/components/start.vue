@@ -92,6 +92,11 @@ input[type="checkbox"] {
   left: 50%;
   top: 7vh;
   transform: translateX(-50%);
+  vertical-align: middle;
+  span,
+  input {
+    vertical-align: middle;
+  }
 }
 @keyframes pulse-text {
   0% {

@@ -37,7 +37,7 @@
       <div
         class="chat-box chat-left animate__animated animate__lightSpeedInLeft animate__fast"
       >
-        <div class="avator">
+        <div class="avator avator2">
           <img src="../assets/zjh-bg.png" style="height: 70%" />
         </div>
         <div class="msg">
@@ -188,7 +188,7 @@ onMounted(() => {
 
   .chat-left {
     text-align: left;
-    .avator {
+    .avator2 {
       transform: rotateY(180deg);
     }
     .name {

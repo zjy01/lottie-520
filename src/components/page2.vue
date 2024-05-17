@@ -23,7 +23,7 @@
     <div v-if="topShow" class="top load">
       <div class="dl dl-t">
         <div class="text">
-          <span v-for="(word, index) in text.duilian3" :key="index">{{
+          <span v-for="(word, index) in duilianTop" :key="index">{{
             word
           }}</span>
         </div>
@@ -78,6 +78,8 @@ import { useSwiperSlide, useSwiper } from "swiper/vue";
 import text from "../config/text";
 import box from "../assets/box.lottie";
 import agreement from "../assets/agreement.lottie";
+
+const duilianTop = text.duilian3.split("").reverse().join("");
 
 const dlDuration = 3000 + 800;
 const rightShow = ref(false);

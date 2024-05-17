@@ -82,12 +82,11 @@
       class="girl-heart animate__animated animate__bounceIn"
     >
       <dotlottie-player
-        :ref="lottieRef"
         class="lottie"
         :src="blHeart"
         :autoplay.attr="true"
         :loop.attr="true"
-        @ready="imgShow = true"
+        @ready="lottieReady"
       />
       <img v-if="imgShow" src="../assets/girl-heart.png" />
     </div>
@@ -128,7 +127,6 @@ const firstTextShow = ref(false);
 const secondTextShow = ref(false);
 const thirdTextShow = ref(false);
 const finalDialogShow = ref(false);
-const lottieRef = ref(null);
 const imgShow = ref(false);
 
 const dialogDuration = 2000;
@@ -174,6 +172,15 @@ onMounted(() => {
     dialogDuration * 3 + textDuration * 3,
   );
 });
+
+function lottieReady(e) {
+  imgShow.value = true;
+  // 透明化
+  const g: HTMLElement = e.target.container.querySelector(
+    "#animation > svg > g > g:nth-child(1)",
+  );
+  g.style.opacity = "0.5";
+}
 </script>
 
 <style scoped lang="less">
@@ -351,6 +358,12 @@ onMounted(() => {
     left: -0.5%;
     transform: translateY(-50%);
     z-index: 1;
+    .animation-container {
+      opacity: 0.3;
+      .animation > svg > g > g:nth-child(1) {
+        opacity: 0.3;
+      }
+    }
   }
 }
 

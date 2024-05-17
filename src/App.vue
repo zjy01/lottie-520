@@ -1,30 +1,31 @@
 <template>
-  <div style="position: relative; overflow: hidden;">
+  <div style="position: relative; overflow: hidden">
     <CssBg />
     <Start v-if="!started" v-model="allowMusice" @start="started = true" />
     <div v-else>
       <audio v-if="allowMusice" id="bgMusic" autoplay loop>
         <source src="./assets/emola.ogg" type="audio/mp3" />
       </audio>
-      <Swiper 
-        @slideChange="onSlideChange" 
-        :allowTouchMove="allowTouchMove"
-        direction="vertical" 
-        autoHeight
-        :allowSlideNext="allowSlideNext"
+      <Swiper
+        :allow-touch-move="allowTouchMove"
+        direction="vertical"
+        auto-height
+        :allow-slide-next="allowSlideNext"
+        @slide-change="onSlideChange"
       >
+        <SwiperSlide><Page3 /></SwiperSlide>
         <SwiperSlide><Page1 v-if="inited[0]" /></SwiperSlide>
-        <SwiperSlide><Page2 v-if="inited[1]"  /></SwiperSlide>
-        <SwiperSlide><Page3 v-if="inited[2]"  /></SwiperSlide>
+        <SwiperSlide><Page2 v-if="inited[1]" /></SwiperSlide>
+        <SwiperSlide><Page3 v-if="inited[2]" /></SwiperSlide>
       </Swiper>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { provide, ref } from "vue";
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import SwiperClass  from 'swiper';
-import 'swiper/css';
+import { Swiper, SwiperSlide } from "swiper/vue";
+import SwiperClass from "swiper";
+import "swiper/css";
 
 import CssBg from "./components/css-bg.vue";
 import Start from "./components/start.vue";
@@ -33,15 +34,15 @@ import Page2 from "./components/page2.vue";
 import Page3 from "./components/page3.vue";
 const started = ref(false);
 const allowMusice = ref(true);
-const inited = ref([true, false, false])
+const inited = ref([true, false, false]);
 
 const allowTouchMove = ref(false);
-provide('allowTouchMove', allowTouchMove);
+provide("allowTouchMove", allowTouchMove);
 const allowSlideNext = ref(true);
-provide('allowSlideNext', allowSlideNext);
+provide("allowSlideNext", allowSlideNext);
 
 function onSlideChange(swiper: SwiperClass) {
-  if (!inited.value[swiper.activeIndex])  {
+  if (!inited.value[swiper.activeIndex]) {
     inited.value[swiper.activeIndex] = true;
   }
   // 第2页不允许滑动到下一页
