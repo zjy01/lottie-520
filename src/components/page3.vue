@@ -107,7 +107,7 @@
         </div>
         <div class="talk">
           {{ text.togger[0] }}<br />{{ text.togger[1]
-          }}<span style="font-size: 7vw">{{ text.togger[3] }}</span>
+          }}<span style="font-size: 7vw">{{ text.togger[2] }}</span>
         </div>
       </div>
     </Transition>
