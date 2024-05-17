@@ -39,8 +39,8 @@
     </div>
     <Transition
       name="t1"
-      enter-active-class="animate__animated animate__zoomInDown"
-      leave-active-class="animate__animated animate__bounceOutRight"
+      enter-active-class="animate__animated animate__zoomInDown animate__fast"
+      leave-active-class="t1-leave-active"
     >
       <div v-if="firstDialogShow" class="dialog">
         <div class="avator">
@@ -52,8 +52,8 @@
     </Transition>
     <Transition
       name="t2"
-      enter-active-class="animate__animated animate__zoomInDown"
-      leave-active-class="animate__animated animate__bounceOutRight"
+      enter-active-class="animate__animated animate__zoomInDown animate__fast"
+      leave-active-class="t2-leave-active"
     >
       <div v-if="secondDialogShow" class="dialog">
         <div class="avator avator-180">
@@ -65,8 +65,8 @@
     </Transition>
     <Transition
       name="t3"
-      enter-active-class="animate__animated animate__zoomInDown"
-      leave-active-class="animate__animated animate__bounceOutRight"
+      enter-active-class="animate__animated animate__zoomInDown animate__fast"
+      leave-active-class="t3-leave-active"
     >
       <div v-if="thirdDialogShow" class="dialog dialog-p">
         <div class="avator">
@@ -91,24 +91,26 @@
       <img v-if="imgShow" src="../assets/girl-heart.png" />
     </div>
 
-    <div
-      v-if="finalDialogShow"
-      class="dialog dialog-final animate__animated animate__fadeInUp"
+    <Transition
+      name="t4"
+      enter-active-class="animate__animated animate__fadeInUp animate__fast"
     >
-      <div class="avator avator1">
-        <img src="../assets/zzb-bg2.png" />
+      <div v-if="finalDialogShow" class="dialog dialog-final">
+        <div class="avator avator1">
+          <img src="../assets/zzb-bg2.png" />
+        </div>
+        <div class="avator avator2">
+          <img src="../assets/zjh-bg2.png" />
+        </div>
+        <div class="avator avator3">
+          <img src="../assets/hunyuan-image-boy-bg.png" />
+        </div>
+        <div class="talk">
+          {{ text.togger[0] }}<br />{{ text.togger[1]
+          }}<span style="font-size: 7vw">{{ text.togger[3] }}</span>
+        </div>
       </div>
-      <div class="avator avator2">
-        <img src="../assets/zjh-bg2.png" />
-      </div>
-      <div class="avator avator3">
-        <img src="../assets/hunyuan-image-boy-bg.png" />
-      </div>
-      <div class="talk">
-        {{ text.togger[0] }}<br />{{ text.togger[1]
-        }}<span style="font-size: 7vw">{{ text.togger[3] }}</span>
-      </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
@@ -129,8 +131,8 @@ const thirdTextShow = ref(false);
 const finalDialogShow = ref(false);
 const imgShow = ref(false);
 
-const dialogDuration = 2000;
-const textDuration = 1000;
+const dialogDuration = 1500;
+const textDuration = 800;
 onMounted(() => {
   setTimeout(() => {
     firstDialogShow.value = true;
@@ -173,7 +175,7 @@ onMounted(() => {
   );
 });
 
-function lottieReady(e) {
+function lottieReady(e: any) {
   imgShow.value = true;
   // 透明化
   const g: HTMLElement = e.target.container.querySelector(
@@ -319,6 +321,10 @@ function lottieReady(e) {
   top: unset;
   bottom: 1vh;
   z-index: 999;
+  &:not(.animate__animated) {
+    animation: pulse 3s ease-in-out infinite;
+  }
+
   .avator1 {
     left: 8vw;
     top: -10vw;
@@ -376,6 +382,53 @@ function lottieReady(e) {
   }
   76.5% {
     transform: scale(1.08);
+  }
+}
+
+.t1-leave-active {
+  animation: dialog-leave-1 0.5s;
+  transform-origin: left top;
+}
+.t2-leave-active {
+  animation: dialog-leave-2 0.5s;
+  transform-origin: left top;
+}
+.t3-leave-active {
+  animation: dialog-leave-3 0.5s;
+  transform-origin: left top;
+}
+
+@keyframes dialog-leave-1 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+    top: 10vw;
+    left: 0vw;
+    opacity: 0;
+  }
+}
+@keyframes dialog-leave-2 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+    top: 30vw;
+    left: 0vw;
+    opacity: 0;
+  }
+}
+@keyframes dialog-leave-3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+    top: 50vw;
+    left: 90vw;
+    opacity: 0;
   }
 }
 </style>

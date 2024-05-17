@@ -60,7 +60,9 @@
       class="gift-dialog-mask"
       @click="showGiftDialog = false"
     >
-      <div class="gift-dialog animate__animated animate__zoomInDown">
+      <div
+        class="gift-dialog animate__animated animate__zoomInDown animate__fast"
+      >
         <p>{{ text.option1Result }}</p>
         <div class="icon-app">
           <img src="../assets/jd.png" />
