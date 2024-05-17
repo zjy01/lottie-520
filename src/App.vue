@@ -13,7 +13,6 @@
         :allow-slide-next="allowSlideNext"
         @slide-change="onSlideChange"
       >
-        <SwiperSlide><Page3 /></SwiperSlide>
         <SwiperSlide><Page1 v-if="inited[0]" /></SwiperSlide>
         <SwiperSlide><Page2 v-if="inited[1]" /></SwiperSlide>
         <SwiperSlide><Page3 v-if="inited[2]" /></SwiperSlide>

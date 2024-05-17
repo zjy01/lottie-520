@@ -88,7 +88,7 @@
         :loop.attr="true"
         @ready="lottieReady"
       />
-      <img v-if="imgShow" src="../assets/girl-heart.png" />
+      <img v-if="imgShow" src="../assets/girl-heart2.png" />
     </div>
 
     <Transition
@@ -404,8 +404,8 @@ function lottieReady(e: any) {
   }
   100% {
     transform: scale(0);
-    top: 10vw;
-    left: 0vw;
+    top: 12vw;
+    left: 5vw;
     opacity: 0;
   }
 }
@@ -415,8 +415,8 @@ function lottieReady(e: any) {
   }
   100% {
     transform: scale(0);
-    top: 30vw;
-    left: 0vw;
+    top: 34vw;
+    left: 5vw;
     opacity: 0;
   }
 }
