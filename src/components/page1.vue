@@ -67,6 +67,13 @@
       />
       <img src="../assets/zzb-bg.png" class="banner-cat1" />
       <img src="../assets/zjh-bg.png" class="banner-cat2" />
+      <dotlottie-player
+        v-if="allowTouchMove"
+        :src="slide"
+        :loop.attr="true"
+        :autoplay.attr="true"
+        class="slide-lottie"
+      />
     </div>
   </div>
 </template>
@@ -76,6 +83,7 @@ import num5 from "../assets/num-5.lottie";
 import num2 from "../assets/num-2.lottie";
 import num0 from "../assets/num-0.lottie";
 import heart from "../assets/heart.lottie";
+import slide from "../assets/slide.lottie";
 import { Ref, inject, onMounted } from "vue";
 import { useSwiper } from "swiper/vue";
 
@@ -254,6 +262,15 @@ onMounted(() => {
     width: 70vw;
     top: 0;
     left: -7vw;
+  }
+  .slide-lottie {
+    position: absolute;
+    bottom: -4vw;
+    width: 50%;
+    left: 25%;
+    height: 25vw;
+    pointer-events: none;
+    transform: rotateX(180deg);
   }
 }
 </style>
