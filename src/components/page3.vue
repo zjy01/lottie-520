@@ -107,7 +107,7 @@
         </div>
         <div class="talk">
           {{ text.togger[0] }}<br />{{ text.togger[1]
-          }}<span style="font-size: 7vw">{{ text.togger[2] }}</span>
+          }}<span class="key-word">{{ text.togger[2] }}</span>
         </div>
       </div>
     </Transition>
@@ -345,6 +345,11 @@ function lottieReady(e: any) {
     margin-top: 0;
     text-align: center;
     margin-left: 0;
+    line-height: 1.2;
+  }
+  .key-word {
+    font-size: 10vw;
+    color: #00d9b1;
   }
 }
 
