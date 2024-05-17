@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" v-if="swiperSlide.isActive">
     <div class="text-box">
       <div
         v-if="firstTextShow"
@@ -98,8 +98,11 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useSwiperSlide } from 'swiper/vue';
 import blHeart from '../assets/bl-heart.lottie';
+
+const swiperSlide = useSwiperSlide();
 
 const firstDialogShow = ref(false);
 const secondDialogShow = ref(false);

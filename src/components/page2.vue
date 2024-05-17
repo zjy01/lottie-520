@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" v-if="swiperSlide.isActive">
     <div class="left load" v-if="leftShow">
       <img src="../assets/zjh-flash.png" />
       <div class="dl">
@@ -50,7 +50,7 @@
         </div>
         <div class="option-item">
           <dotlottie-player class="lottie2" :src="agreement" :autoplay.attr="true" :loop.attr="true" />
-          <span>定下一份契约</span>
+          <span @click="goNext">定下一份契约</span>
         </div>
       </div>
     </div>
@@ -68,7 +68,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { Ref, inject, onMounted, ref } from 'vue';
+  import { useSwiperSlide, useSwiper } from 'swiper/vue';
 import box from '../assets/box.lottie';
 import agreement from '../assets/agreement.lottie';
 
@@ -78,7 +79,21 @@ const leftShow = ref(false);
 const topShow = ref(false);
 const optShow = ref(false); 
 const showGiftDialog = ref(false); 
+
+const swiperSlide = useSwiperSlide();
+const swiper = useSwiper();
+
+const allowSlideNext = inject<Ref<boolean>>('allowSlideNext');
+
+function goNext() {
+  allowSlideNext!.value = true;
+  setTimeout(() => {
+    swiper.value.slideNext();
+  });
+}
+
 onMounted(() => {
+  allowSlideNext!.value = false; 
   // 上联加载
   setTimeout(() => {
     rightShow.value = true;
