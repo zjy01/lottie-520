@@ -14,11 +14,11 @@
 }
 @font-face {
   font-family: 'youxi';
-  src: url('./assets/yx.ttf');
+  src: url('./assets/fontmin/yx.ttf');
 }
 @font-face {
   font-family: 'dl';
-  src: url('./assets/dl3.ttf');
+  src: url('./assets/fontmin/dl.ttf');
 }
 * {
   box-sizing: border-box;

@@ -8,24 +8,23 @@
         class="love"
       />
       <div class="title">
-        <span>展</span>
-        <span>信</span>
-        <span>悦</span>
+        <span v-for="(word, index) in text.startTitle" :key="index">{{
+          word
+        }}</span>
       </div>
     </div>
-    <div style="position: relative;">
+    <div style="position: relative">
       <dotlottie-player
         :src="button"
         :autoplay.attr="true"
         :loop.attr="true"
         class="btn"
-        
       />
       <label class="checkbox">
         <input type="checkbox" :checked="!model" @change="handleClick" />
-        <span>不要音乐</span>
+        <span>{{ text.noMusic }}</span>
       </label>
-      <div @click="$emit('start', {})" class="click-area"></div>
+      <div class="click-area" @click="$emit('start', {})"></div>
     </div>
   </div>
 </template>
@@ -33,6 +32,7 @@
 <script setup lang="ts">
 import heart from "../assets/love.lottie";
 import button from "../assets/button.lottie";
+import text from "../config/text";
 
 const model = defineModel<boolean>();
 defineEmits(["start"]);
@@ -45,7 +45,7 @@ function handleClick(e: any) {
 
 <style scoped lang="less">
 .page {
-  font-family: 'youxi';
+  font-family: "youxi";
   height: 100vh;
   width: 100vw;
   color: white;
@@ -94,22 +94,22 @@ input[type="checkbox"] {
   transform: translateX(-50%);
 }
 @keyframes pulse-text {
-    0% {
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
-        text-shadow: #027d67 -0.02em -0.02em;
-    }
+  0% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    text-shadow: #027d67 -0.02em -0.02em;
+  }
 
-    50% {
-        -webkit-transform: scale3d(1.05,1.05,1.05);
-        transform: scale3d(1.05,1.05,1.05);
-        text-shadow: #027d67 -0.03em -0.03em;
-    }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+    text-shadow: #027d67 -0.03em -0.03em;
+  }
 
-    to {
-        -webkit-transform: scaleX(1);
-        transform: scaleX(1);
-        text-shadow: #027d67 -0.02em -0.02em;
-    }
+  to {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    text-shadow: #027d67 -0.02em -0.02em;
+  }
 }
 </style>

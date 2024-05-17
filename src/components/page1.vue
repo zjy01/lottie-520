@@ -77,16 +77,16 @@ import num2 from "../assets/num-2.lottie";
 import num0 from "../assets/num-0.lottie";
 import heart from "../assets/heart.lottie";
 import { Ref, inject, onMounted } from "vue";
-  import { useSwiper } from 'swiper/vue';
+import { useSwiper } from "swiper/vue";
 
-const allowTouchMove = inject<Ref<boolean>>('allowTouchMove');
+const allowTouchMove = inject<Ref<boolean>>("allowTouchMove");
 const swpier = useSwiper();
 onMounted(() => {
   setTimeout(() => {
     swpier.value.allowTouchMove = true;
     allowTouchMove!.value = true;
   }, 2000);
-})
+});
 </script>
 
 <style scoped lang="less">

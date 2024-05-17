@@ -1,5 +1,5 @@
 <template>
-  <div class="page" v-if="swiperSlide.isActive">
+  <div v-if="swiperSlide.isActive" class="page">
     <div class="text-box">
       <div
         v-if="firstTextShow"
@@ -10,7 +10,7 @@
         </div>
         <div class="msg">
           <div class="name">嫡长猫: 张张苞</div>
-          <div class="text">我承诺: 多吃猫粮多喝水</div>
+          <div class="text">{{ text.promise }}{{ text.cat1Promise }}</div>
         </div>
       </div>
       <div
@@ -22,7 +22,7 @@
         </div>
         <div class="msg">
           <div class="name">大犟种: 张茄灰</div>
-          <div class="text">我承诺: 乖乖听姐姐的话</div>
+          <div class="text">{{ text.promise }}{{ text.cat2Promise }}</div>
         </div>
       </div>
       <div
@@ -30,77 +30,94 @@
         class="chat-box chat-right animate__animated animate__lightSpeedInRight animate__fast"
       >
         <div class="msg">
-          <div class="text">我承诺: 多吃饭早睡觉少讲道理</div>
+          <div class="text">{{ text.promise }}{{ text.humanPromise }}</div>
         </div>
         <div class="avator">
           <img src="../assets/hunyuan-image-boy-bg.png" style="height: 100%" />
         </div>
       </div>
     </div>
-    <Transition 
+    <Transition
       name="t1"
       enter-active-class="animate__animated animate__zoomInDown"
       leave-active-class="animate__animated animate__bounceOutRight"
     >
       <div v-if="firstDialogShow" class="dialog">
-          <div class="avator">
-            <img src="../assets/zzb-bg2.png" />
-          </div>
-        <div class="label">我承诺: </div>
-        <div class="talk">多吃猫粮多喝水</div>
+        <div class="avator">
+          <img src="../assets/zzb-bg2.png" />
+        </div>
+        <div class="label">{{ text.promise }}</div>
+        <div class="talk">{{ text.cat1Promise }}</div>
       </div>
     </Transition>
-    <Transition 
+    <Transition
       name="t2"
       enter-active-class="animate__animated animate__zoomInDown"
       leave-active-class="animate__animated animate__bounceOutRight"
     >
-    <div v-if="secondDialogShow" class="dialog">
+      <div v-if="secondDialogShow" class="dialog">
         <div class="avator avator-180">
           <img src="../assets/zjh-bg2.png" />
         </div>
-      <div class="label">我承诺: </div>
-      <div class="talk">乖乖听姐姐的话</div>
-    </div>
+        <div class="label">{{ text.promise }}</div>
+        <div class="talk">{{ text.cat2Promise }}</div>
+      </div>
     </Transition>
-    <Transition 
+    <Transition
       name="t3"
       enter-active-class="animate__animated animate__zoomInDown"
       leave-active-class="animate__animated animate__bounceOutRight"
     >
-    <div v-if="thirdDialogShow" class="dialog dialog-p">
+      <div v-if="thirdDialogShow" class="dialog dialog-p">
         <div class="avator">
           <img src="../assets/hunyuan-image-boy-bg.png" />
         </div>
-      <div class="label">我承诺: </div>
-      <div class="talk">多吃饭早睡觉少讲道理</div>
-    </div>
+        <div class="label">{{ text.promise }}</div>
+        <div class="talk">{{ text.humanPromise }}</div>
+      </div>
     </Transition>
 
-    <div v-if="finalDialogShow" class="girl-heart animate__animated  animate__bounceIn">
-      <dotlottie-player @ready="imgShow = true" :ref="lottieRef" class="lottie" :src="blHeart" :autoplay.attr="true" :loop.attr="true" />
+    <div
+      v-if="finalDialogShow"
+      class="girl-heart animate__animated animate__bounceIn"
+    >
+      <dotlottie-player
+        :ref="lottieRef"
+        class="lottie"
+        :src="blHeart"
+        :autoplay.attr="true"
+        :loop.attr="true"
+        @ready="imgShow = true"
+      />
       <img v-if="imgShow" src="../assets/girl-heart.png" />
     </div>
 
-    <div v-if="finalDialogShow" class="dialog dialog-final animate__animated  animate__fadeInUp">
-        <div class="avator avator1">
-          <img src="../assets/zzb-bg2.png" />
-        </div>
-        <div class="avator avator2">
-          <img src="../assets/zjh-bg2.png" />
-        </div>
-        <div class="avator avator3">
-          <img src="../assets/hunyuan-image-boy-bg.png" />
-        </div>
-      <div class="talk">超爱我的家<br/>超爱家里的<span style="font-size: 7vw">她</span></div>
+    <div
+      v-if="finalDialogShow"
+      class="dialog dialog-final animate__animated animate__fadeInUp"
+    >
+      <div class="avator avator1">
+        <img src="../assets/zzb-bg2.png" />
+      </div>
+      <div class="avator avator2">
+        <img src="../assets/zjh-bg2.png" />
+      </div>
+      <div class="avator avator3">
+        <img src="../assets/hunyuan-image-boy-bg.png" />
+      </div>
+      <div class="talk">
+        {{ text.togger[0] }}<br />{{ text.togger[1]
+        }}<span style="font-size: 7vw">{{ text.togger[3] }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useSwiperSlide } from 'swiper/vue';
-import blHeart from '../assets/bl-heart.lottie';
+import { onMounted, ref } from "vue";
+import { useSwiperSlide } from "swiper/vue";
+import text from "../config/text";
+import blHeart from "../assets/bl-heart.lottie";
 
 const swiperSlide = useSwiperSlide();
 
@@ -128,24 +145,35 @@ onMounted(() => {
   setTimeout(() => {
     secondDialogShow.value = true;
   }, dialogDuration + textDuration);
-  setTimeout(() => {
-    secondTextShow.value = true;
-    secondDialogShow.value = false;
-  }, dialogDuration * 2 + textDuration);
+  setTimeout(
+    () => {
+      secondTextShow.value = true;
+      secondDialogShow.value = false;
+    },
+    dialogDuration * 2 + textDuration,
+  );
 
-  setTimeout(() => {
-    thirdDialogShow.value = true;
-  }, dialogDuration * 2 + textDuration * 2);
-  setTimeout(() => {
-    thirdTextShow.value = true;
-    thirdDialogShow.value = false;
-  }, dialogDuration * 3 + textDuration * 2);
+  setTimeout(
+    () => {
+      thirdDialogShow.value = true;
+    },
+    dialogDuration * 2 + textDuration * 2,
+  );
+  setTimeout(
+    () => {
+      thirdTextShow.value = true;
+      thirdDialogShow.value = false;
+    },
+    dialogDuration * 3 + textDuration * 2,
+  );
 
-  setTimeout(() => {
-    finalDialogShow.value = true;
-  }, dialogDuration * 3 + textDuration * 3);
-
-})
+  setTimeout(
+    () => {
+      finalDialogShow.value = true;
+    },
+    dialogDuration * 3 + textDuration * 3,
+  );
+});
 </script>
 
 <style scoped lang="less">
@@ -237,7 +265,7 @@ onMounted(() => {
 }
 
 .dialog {
-  font-family: 'youxi';
+  font-family: "youxi";
   padding: 2vh 8vw;
   position: absolute;
   font-size: 5vw;
@@ -327,7 +355,10 @@ onMounted(() => {
 }
 
 @keyframes imgScale {
-  0%, 66.4%, 85.9%, 100% {
+  0%,
+  66.4%,
+  85.9%,
+  100% {
     transform: scale(1);
   }
   76.5% {

@@ -1,62 +1,67 @@
 <template>
-  <div class="page" v-if="swiperSlide.isActive">
-    <div class="left load" v-if="leftShow">
+  <div v-if="swiperSlide.isActive" class="page">
+    <div v-if="leftShow" class="left load">
       <img src="../assets/zjh-flash.png" />
       <div class="dl">
         <div class="text">
-          <span>才</span>
-          <span>情</span>
-          <span>出</span>
-          <span>众</span>
-          <span>爱</span>
-          <span>猫</span>
-          <span>缘</span>
+          <span v-for="(word, index) in text.duilian2" :key="index">{{
+            word
+          }}</span>
         </div>
       </div>
     </div>
-    <div class="right load" v-if="rightShow">
+    <div v-if="rightShow" class="right load">
       <img src="../assets/zzb-flash.png" />
       <div class="dl">
         <div class="text">
-          <span>貌</span>
-          <span>赛</span>
-          <span>花</span>
-          <span>魁</span>
-          <span>猫</span>
-          <span>中</span>
-          <span>仙</span>
+          <span v-for="(word, index) in text.duilian1" :key="index">{{
+            word
+          }}</span>
         </div>
       </div>
     </div>
-    <div class="top load" v-if="topShow">
+    <div v-if="topShow" class="top load">
       <div class="dl dl-t">
         <div class="text">
-          <span>善</span>
-          <span>心</span>
-          <span>美</span>
-          <span>人</span>
+          <span v-for="(word, index) in text.duilian3" :key="index">{{
+            word
+          }}</span>
         </div>
       </div>
     </div>
-    <div class="opt animate__animated animate__zoomInDown" v-if="optShow">
+    <div v-if="optShow" class="opt animate__animated animate__zoomInDown">
       <div class="cat">
-        <img src="../assets/zzb-good.png"/>
+        <img src="../assets/zzb-good.png" />
       </div>
-      <p>请直视可爱之神<br />许下你的愿望</p>
+      <p>{{ text.optionTitle[0] }}<br />{{ text.optionTitle[1] }}</p>
       <div class="options">
         <div class="option-item">
-          <dotlottie-player class="lottie" :src="box" :autoplay.attr="true" :loop.attr="true" />
-          <span @click="showGiftDialog = true">选择一份礼品</span>
+          <dotlottie-player
+            class="lottie"
+            :src="box"
+            :autoplay.attr="true"
+            :loop.attr="true"
+          />
+          <span @click="showGiftDialog = true">{{ text.option1 }}</span>
         </div>
         <div class="option-item">
-          <dotlottie-player class="lottie2" :src="agreement" :autoplay.attr="true" :loop.attr="true" />
-          <span @click="goNext">定下一份契约</span>
+          <dotlottie-player
+            class="lottie2"
+            :src="agreement"
+            :autoplay.attr="true"
+            :loop.attr="true"
+          />
+          <span @click="goNext">{{ text.option2 }}</span>
         </div>
       </div>
     </div>
-    <div v-if="showGiftDialog" class="gift-dialog-mask" @click="showGiftDialog = false">
+    <div
+      v-if="showGiftDialog"
+      class="gift-dialog-mask"
+      @click="showGiftDialog = false"
+    >
       <div class="gift-dialog animate__animated animate__zoomInDown">
-        <p>请使用手机，自行选择以下任一款APP选择商品并下单，提供订单号进行报销。</p>
+        <p>{{ text.option1Result }}</p>
         <div class="icon-app">
           <img src="../assets/jd.png" />
           <img src="../assets/tb.png" />
@@ -68,22 +73,22 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, inject, onMounted, ref } from 'vue';
-  import { useSwiperSlide, useSwiper } from 'swiper/vue';
-import box from '../assets/box.lottie';
-import agreement from '../assets/agreement.lottie';
+import { Ref, inject, onMounted, ref } from "vue";
+import { useSwiperSlide, useSwiper } from "swiper/vue";
+import text from "../config/text";
+import box from "../assets/box.lottie";
+import agreement from "../assets/agreement.lottie";
 
 const dlDuration = 3000 + 800;
 const rightShow = ref(false);
 const leftShow = ref(false);
 const topShow = ref(false);
-const optShow = ref(false); 
-const showGiftDialog = ref(false); 
-
+const optShow = ref(false);
+const showGiftDialog = ref(false);
 const swiperSlide = useSwiperSlide();
 const swiper = useSwiper();
 
-const allowSlideNext = inject<Ref<boolean>>('allowSlideNext');
+const allowSlideNext = inject<Ref<boolean>>("allowSlideNext");
 
 function goNext() {
   allowSlideNext!.value = true;
@@ -93,7 +98,7 @@ function goNext() {
 }
 
 onMounted(() => {
-  allowSlideNext!.value = false; 
+  allowSlideNext!.value = false;
   // 上联加载
   setTimeout(() => {
     rightShow.value = true;
@@ -107,10 +112,13 @@ onMounted(() => {
     topShow.value = true;
   }, dlDuration * 2);
   // 选项加载
-  setTimeout(() => {
-    optShow.value = true;
-  }, dlDuration * 2 + 1500);
-})
+  setTimeout(
+    () => {
+      optShow.value = true;
+    },
+    dlDuration * 2 + 1500,
+  );
+});
 </script>
 
 <style scoped lang="less">
@@ -118,7 +126,7 @@ onMounted(() => {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  font-family: 'dl';
+  font-family: "dl";
 }
 .left {
   position: absolute;
@@ -136,7 +144,7 @@ onMounted(() => {
     animation: fadeInLeft 1s;
   }
 }
-.right { 
+.right {
   position: absolute;
   height: 80vh;
   right: 5vw;
@@ -149,12 +157,12 @@ onMounted(() => {
 }
 .load {
   img {
-    animation: fadeInRight .8s;
+    animation: fadeInRight 0.8s;
   }
   .dl {
     @t: 3s;
     height: 0vw;
-    animation: dl-v-animation @t linear .7s forwards;
+    animation: dl-v-animation @t linear 0.7s forwards;
     span {
       each(range(7), {
         &:nth-child(@{value}) {
@@ -176,7 +184,7 @@ onMounted(() => {
     }
   }
 }
-.top { 
+.top {
   position: absolute;
   top: 5vw;
   left: 25vw;
@@ -188,9 +196,9 @@ onMounted(() => {
     width: 50vw;
     line-height: 15vw;
     font-size: 9vw;
-    background-image: url('../assets/dl-h.png');
+    background-image: url("../assets/dl-h.png");
     background-size: 50vw 100%;
-    background-position: right; 
+    background-position: right;
     .text {
       padding-top: 0;
       height: 15vw;
@@ -207,11 +215,11 @@ onMounted(() => {
   height: 128vw;
   font-size: 10vw;
   text-align: center;
-  text-shadow: rgba(0, 0, 0, .5) 1px 1px;
+  text-shadow: rgba(0, 0, 0, 0.5) 1px 1px;
   line-height: 1.4em;
   color: #e4dbab;
-  background-image: url('../assets/dl-s.png');
-  background-size: 100% 128vw; 
+  background-image: url("../assets/dl-s.png");
+  background-size: 100% 128vw;
   background-repeat: no-repeat;
   overflow: hidden;
 
@@ -249,7 +257,7 @@ onMounted(() => {
 }
 
 .opt {
-  font-family: 'youxi';
+  font-family: "youxi";
   width: 50vw;
   position: absolute;
   top: 30vh;
@@ -300,7 +308,7 @@ onMounted(() => {
 }
 
 .gift-dialog {
-  font-family: 'youxi';
+  font-family: "youxi";
   padding: 8vw;
   position: absolute;
   font-size: 4vw;
@@ -321,5 +329,4 @@ onMounted(() => {
     }
   }
 }
-
 </style>
