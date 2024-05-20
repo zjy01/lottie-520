@@ -1,9 +1,9 @@
 const text = {
   startTitle: "展信悦",
   noMusic: "不要音乐",
-  duilian1: "貌赛花魁猫中仙",
-  duilian2: "才情出众爱猫缘",
-  duilian3: "人美心善",
+  duilian1: "玉貌倾城猫亦醉",
+  duilian2: "慧心养宠韵同馨",
+  duilian3: "宠爱双全",
   optionTitle: ["请直视可爱之神", "许下你的愿望"],
   option1: "选择一份礼品",
   option2: "定下一份契约",

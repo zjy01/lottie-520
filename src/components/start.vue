@@ -93,6 +93,8 @@ input[type="checkbox"] {
   top: 7vh;
   transform: translateX(-50%);
   vertical-align: middle;
+  font-size: 3.9vw;
+  line-height: 4.5vw;
   span,
   input {
     vertical-align: middle;
